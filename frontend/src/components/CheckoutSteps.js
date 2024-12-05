@@ -1,53 +1,56 @@
-import React from 'react';
-import { Card, Nav } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap';
+import React from "react";
+import { Card, Nav } from "react-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
   return (
-    <Nav className='justify-content-center mb-4'>
+    <Nav className="justify-content-center mb-4">
       <Nav.Item>
         {step1 ? (
-          <LinkContainer to='/login'>
-            <Nav.Link className='btn btn-primary btn-sm px-2 py-1 mx-2'>
-              Sign In
+          <LinkContainer to="/login">
+            <Nav.Link className="btn btn-primary btn-sm px-2 py-1 mx-2">
+              Main Page
             </Nav.Link>
           </LinkContainer>
         ) : (
           <Nav.Link
             disabled
-            className='btn btn-secondary btn-sm px-2 py-1 mx-2'>
-            Sign In
+            className="btn btn-secondary btn-sm px-2 py-1 mx-2"
+          >
+            Main Page
           </Nav.Link>
         )}
       </Nav.Item>
 
       <Nav.Item>
         {step2 ? (
-          <LinkContainer to='/shipping'>
-            <Nav.Link className='btn btn-primary btn-sm px-2 py-1 mx-2'>
-              Shipping
+          <LinkContainer to="/shipping">
+            <Nav.Link className="btn btn-primary btn-sm px-2 py-1 mx-2">
+              User Information
             </Nav.Link>
           </LinkContainer>
         ) : (
           <Nav.Link
             disabled
-            className='btn btn-secondary btn-sm px-2 py-1 mx-2'>
-            Shipping
+            className="btn btn-secondary btn-sm px-2 py-1 mx-2"
+          >
+            User Information
           </Nav.Link>
         )}
       </Nav.Item>
 
       <Nav.Item>
         {step3 ? (
-          <LinkContainer to='/payment'>
-            <Nav.Link className='btn btn-primary btn-sm px-2 py-1 mx-2'>
+          <LinkContainer to="/payment">
+            <Nav.Link className="btn btn-primary btn-sm px-2 py-1 mx-2">
               Payment
             </Nav.Link>
           </LinkContainer>
         ) : (
           <Nav.Link
             disabled
-            className='btn btn-secondary btn-sm px-2 py-1 mx-2'>
+            className="btn btn-secondary btn-sm px-2 py-1 mx-2"
+          >
             Payment
           </Nav.Link>
         )}
@@ -55,15 +58,16 @@ const CheckoutSteps = ({ step1, step2, step3, step4 }) => {
 
       <Nav.Item>
         {step4 ? (
-          <LinkContainer to='/placeorder'>
-            <Nav.Link className='btn btn-primary btn-sm px-2 py-1 mx-2'>
+          <LinkContainer to="/placeorder">
+            <Nav.Link className="btn btn-primary btn-sm px-2 py-1 mx-2">
               Place Order
             </Nav.Link>
           </LinkContainer>
         ) : (
           <Nav.Link
             disabled
-            className='btn btn-secondary btn-sm px-2 py-1 mx-2'>
+            className="btn btn-secondary btn-sm px-2 py-1 mx-2"
+          >
             Place Order
           </Nav.Link>
         )}
