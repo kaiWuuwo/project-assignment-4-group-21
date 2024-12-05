@@ -73,7 +73,7 @@ const HomeScreen = ({ match }) => {
   }, [dispatch, keyword]);
 
   return (
-    <>
+    <div>
       <Meta />
       {!keyword ? (
         <>
@@ -91,119 +91,130 @@ const HomeScreen = ({ match }) => {
         <Message variant="danger">{error}</Message>
       ) : (
         <>
-          <div className="mb-5">
+          <div className="mb-5 container">
             <Row>
               <Col md={12}>
-                <h2 className="sub-heading mb-4" style={{marginTop: '27px',
-                  marginLeft: '450px'}}>
+                <h2>
                   {selectedCategory
                     ? `${selectedCategory} Products`
                     : "New Products"}
                 </h2>
               </Col>
             </Row>
-            <Row className="mb-4">
-              <Col sm={12} md={4} className="mb-2">
-                <Form.Group>
-                  <Form.Label>Category</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={selectedCategory}
-                    onChange={(e) => {
-                      setSelectedCategory(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <option value="">All Categories</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Fashion and Apparel">
-                      Fashion and Apparel
-                    </option>
-                    <option value="Home and Living">Home and Living</option>
-                  </Form.Control>
-                </Form.Group>
-              </Col>
-
-              <Col sm={12} md={4} className="mb-2">
-                <Form.Group>
-                  <Form.Label>Price Range</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={priceRange}
-                    onChange={(e) => {
-                      setPriceRange(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <option value="all">All Prices</option>
-                    <option value="under50">Under $50</option>
-                    <option value="50to100">$50 - $100</option>
-                    <option value="over100">Over $100</option>
-                  </Form.Control>
-                </Form.Group>
-              </Col>
-
-              <Col sm={12} md={4} className="mb-2">
-                <Form.Group>
-                  <Form.Label>Rating</Form.Label>
-                  <Form.Control
-                    as="select"
-                    value={ratingFilter}
-                    onChange={(e) => {
-                      setRatingFilter(e.target.value);
-                      setCurrentPage(1);
-                    }}
-                  >
-                    <option value="all">All Ratings</option>
-                    <option value="4">4★ & Above</option>
-                    <option value="3">3★ & Above</option>
-                    <option value="2">2★ & Above</option>
-                  </Form.Control>
-                </Form.Group>
-              </Col>
-            </Row>
-
-            {/* 产品展示 */}
             <Row>
-              {filteredProducts.length > 0 ? (
-                filteredProducts
-                  .slice(
-                    (currentPage - 1) * productsPerPage,
-                    currentPage * productsPerPage,
-                  )
-                  .map((product) => (
-                    <Col key={product._id} sm={12} md={6} lg={4} xl={3}>
-                      <Product product={product} />
-                    </Col>
-                  ))
-              ) : (
-                <Col md={12}>
-                  <NoProductFound />
-                </Col>
-              )}
-            </Row>
+              {/* 左侧筛选栏 */}
+              <Col md={3}>
+                <Card>
+                  <Card.Body>
+                    <h4>Filters</h4>
+                    <Form.Group className="mb-3">
+                      <Form.Label>Category</Form.Label>
+                      <Form.Control
+                        as="select"
+                        value={selectedCategory}
+                        onChange={(e) => {
+                          setSelectedCategory(e.target.value);
+                          setCurrentPage(1);
+                        }}
+                      >
+                        <option value="">All Categories</option>
+                        <option value="desktops">desktops</option>
+                        <option value="laptops">laptops</option>
+                        <option value="accessories">accessories</option>
+                      </Form.Control>
+                    </Form.Group>
 
-            {/* 分页 保持原样 */}
-            {filteredProducts.length > productsPerPage && (
-              <Pagination className="mt-3">
-                {Array.from({
-                  length: Math.ceil(filteredProducts.length / productsPerPage),
-                }).map((_, index) => (
-                  <Pagination.Item
-                    key={index + 1}
-                    active={index + 1 === currentPage}
-                    onClick={() => setCurrentPage(index + 1)}
-                  >
-                    {index + 1}
-                  </Pagination.Item>
-                ))}
-              </Pagination>
-            )}
+                    <Form.Group className="mb-3">
+                      <Form.Label>Price Range</Form.Label>
+                      <Form.Control
+                        as="select"
+                        value={priceRange}
+                        onChange={(e) => {
+                          setPriceRange(e.target.value);
+                          setCurrentPage(1);
+                        }}
+                      >
+                        <option value="all">All Prices</option>
+                        <option value="under50">Under $50</option>
+                        <option value="50to100">$50 - $100</option>
+                        <option value="over100">Over $100</option>
+                      </Form.Control>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3">
+                      <Form.Label>Rating</Form.Label>
+                      <Form.Control
+                        as="select"
+                        value={ratingFilter}
+                        onChange={(e) => {
+                          setRatingFilter(e.target.value);
+                          setCurrentPage(1);
+                        }}
+                      >
+                        <option value="all">All Ratings</option>
+                        <option value="4">4★ & Above</option>
+                        <option value="3">3★ & Above</option>
+                        <option value="2">2★ & Above</option>
+                      </Form.Control>
+                    </Form.Group>
+                  </Card.Body>
+                </Card>
+              </Col>
+
+              {/* 右侧商品列表 */}
+              <Col md={9}>
+                <div>
+                  <Row>
+                    {filteredProducts.length > 0 ? (
+                      filteredProducts
+                        .slice(
+                          (currentPage - 1) * productsPerPage,
+                          currentPage * productsPerPage,
+                        )
+                        .map((product) => (
+                          <Col
+                            key={product._id}
+                            sm={12}
+                            md={6}
+                            lg={4}
+                            className="mb-4"
+                          >
+                            <Product product={product} />
+                          </Col>
+                        ))
+                    ) : (
+                      <Col md={12}>
+                        <NoProductFound />
+                      </Col>
+                    )}
+                  </Row>
+
+                  {/* 分页 */}
+                  {filteredProducts.length > productsPerPage && (
+                    <Pagination>
+                      {Array.from({
+                        length: Math.ceil(
+                          filteredProducts.length / productsPerPage,
+                        ),
+                      }).map((_, index) => (
+                        <Pagination.Item
+                          key={index + 1}
+                          active={index + 1 === currentPage}
+                          onClick={() => setCurrentPage(index + 1)}
+                        >
+                          {index + 1}
+                        </Pagination.Item>
+                      ))}
+                    </Pagination>
+                  )}
+                </div>
+              </Col>
+            </Row>
           </div>
         </>
       )}
       <ServiceBanner />
-    </>
+    </div>
   );
 };
 
