@@ -74,6 +74,36 @@ const HomeScreen = ({ match }) => {
 
   return (
     <div>
+      <div className="text-center mb-4">
+        <h1
+          className="main-title"
+          style={{
+            color: "#2c3e50",
+            fontSize: "2.5rem",
+            fontWeight: "bold",
+            background: "linear-gradient(45deg, #ff6b6b, #4ecdc4)",
+            padding: "20px",
+            borderRadius: "10px",
+            textTransform: "uppercase",
+            letterSpacing: "2px",
+            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+            margin: "20px 0",
+            color: "white",
+          }}
+        >
+          Welcome to Store
+          <div
+            style={{
+              fontSize: "1rem",
+              fontWeight: "normal",
+              marginTop: "10px",
+              textTransform: "none",
+            }}
+          >
+            You can find best computers and accessories
+          </div>
+        </h1>
+      </div>
       <Meta />
       {!keyword ? (
         <>
