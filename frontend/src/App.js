@@ -21,7 +21,9 @@ import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
   return (
+    // add the router to all the components
     <Router>
+      // show the header at the top of the page
       <Header />
       <main className="py-4">
         <Container>
@@ -58,6 +60,7 @@ const App = () => {
           <Route path="/" component={HomeScreen} exact />
         </Container>
       </main>
+      // show the footer at the page
       <Footer />
     </Router>
   );

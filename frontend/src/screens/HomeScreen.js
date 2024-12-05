@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Row, Col, Form, Card, Pagination } from "react-bootstrap";
 
-// 组件导入
+// add the components
 import Product from "../components/Product";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -12,7 +12,7 @@ import ServiceBanner from "../components/ServiceBanner";
 import NoProductFound from "../components/NoProductFound";
 import Meta from "../components/Meta";
 
-// Actions 导入
+// add actions
 import { listProducts } from "../actions/productActions";
 const HomeScreen = ({ match }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -26,11 +26,10 @@ const HomeScreen = ({ match }) => {
   const productList = useSelector((state) => state.productList);
   const { loading, error, products } = productList;
 
-  // 筛选函数
+  // filter function
   const getFilteredProducts = () => {
     let filtered = [...products];
 
-    // 类别筛选
     if (selectedCategory) {
       filtered = filtered.filter(
         (product) => product.category === selectedCategory,
