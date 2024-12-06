@@ -4,9 +4,10 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
-  CART_CALCULATE_TOTALS, // 新增常量
+  CART_CALCULATE_TOTALS, 
 } from "../constants/cartConstants";
 
+// add to the cart
 export const addToCart = (id, qty) => async (dispatch, getState) => {
   const { data } = await axios.get(`/api/products/${id}`);
 
@@ -19,11 +20,10 @@ export const addToCart = (id, qty) => async (dispatch, getState) => {
       price: data.price,
       countInStock: data.countInStock,
       qty,
-      shippingFee: 5, // 每件商品固定运费5
+      shippingFee: 5, 
     },
   });
 
-  // 添加商品后重新计算总额
   dispatch(calculateTotals());
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
@@ -35,32 +35,29 @@ export const removeFromCart = (id) => async (dispatch, getState) => {
     payload: id,
   });
 
-  // 移除商品后重新计算总额
   dispatch(calculateTotals());
 
   localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
 
-// 新增计算总额的action
 export const calculateTotals = () => (dispatch, getState) => {
   const { cartItems } = getState().cart;
 
-  // 计算商品总价
+  // calculate the price
   const itemsPrice = cartItems.reduce(
     (acc, item) => acc + item.price * item.qty,
     0,
   );
 
-  // 计算总运费 (每件商品5)
+  // calculate the shipping fee
   const shippingPrice = cartItems.reduce(
     (acc, item) => acc + item.shippingFee * item.qty,
     0,
   );
 
-  // 计算税费 (10%)
+  // calculate the tax
   const taxPrice = itemsPrice * 0.1;
 
-  // 计算总价 (商品总价 + 运费 + 税费)
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
 
   dispatch({

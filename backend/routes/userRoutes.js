@@ -12,19 +12,19 @@ import {
 } from '../controllers/userController.js';
 import { protect, admin } from '../middleware/authMiddleware.js';
 
-// reg a user
+// user register
 router.route('/').post(registerUser).get(protect, admin, getUsers);
 
 // user login
 router.post('/login', authUser);
 
-// get or updated a user profile
+// user profile
 router
   .route('/profile')
   .get(protect, getUserProfile)
   .put(protect, updateUserProfile);
 
-// delete user by admin
+// operate the user information
 router
   .route('/:id')
   .delete(protect, admin, deleteUser)

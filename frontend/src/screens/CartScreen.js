@@ -45,24 +45,29 @@ const CartScreen = ({ match, location }) => {
       <h2 className="sub-heading">Shopping Cart</h2>
       <Row>
         <Col xs={12}>
-          {/* 购物车为空的提示 */}
           {cartItems.length === 0 ? (
             <Message>
               Your Cart is empty <Link to="/">Back To Shopping</Link>
             </Message>
           ) : (
             <>
-              {/* 购物车商品列表 */}
               <Card className="box mb-4">
                 <ListGroup variant="flush">
                   {cartItems.map((item) => (
                     <ListGroup.Item key={item.product} className="px-3">
                       <Row className="align-items-center">
                         <Col xs={3} md={2}>
-                          <Image src={item.image} alt={item.name} fluid rounded />
+                          <Image
+                            src={item.image}
+                            alt={item.name}
+                            fluid
+                            rounded
+                          />
                         </Col>
                         <Col xs={9} md={4}>
-                          <Link to={`/product/${item.product}`}>{item.name}</Link>
+                          <Link to={`/product/${item.product}`}>
+                            {item.name}
+                          </Link>
                         </Col>
                         <Col xs={4} md={2} className="text-center mt-3 mt-md-0">
                           ${item.price}
@@ -74,7 +79,7 @@ const CartScreen = ({ match, location }) => {
                             value={item.qty}
                             onChange={(e) =>
                               dispatch(
-                                addToCart(item.product, Number(e.target.value))
+                                addToCart(item.product, Number(e.target.value)),
                               )
                             }
                           >
@@ -100,7 +105,6 @@ const CartScreen = ({ match, location }) => {
                 </ListGroup>
               </Card>
 
-              {/* 订单总结 */}
               <Card className="box">
                 <Card.Body>
                   <ListGroup variant="flush">
@@ -109,7 +113,10 @@ const CartScreen = ({ match, location }) => {
                     </ListGroup.Item>
                     <ListGroup.Item className="px-0">
                       <Row>
-                        <Col>Items ({cartItems.reduce((acc, item) => acc + item.qty, 0)}):</Col>
+                        <Col>
+                          Items (
+                          {cartItems.reduce((acc, item) => acc + item.qty, 0)}):
+                        </Col>
                         <Col className="text-right">${itemsPrice}</Col>
                       </Row>
                     </ListGroup.Item>

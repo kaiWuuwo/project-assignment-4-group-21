@@ -95,9 +95,6 @@ export const deleteProduct = (id) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    // if (message === 'Not authorized, token failed') {
-    //   dispatch(logout());
-    // }
     dispatch({
       type: PRODUCT_DELETE_FAIL,
       payload: message,
@@ -175,9 +172,6 @@ export const updateProduct = (product) => async (dispatch, getState) => {
       error.response && error.response.data.message
         ? error.response.data.message
         : error.message;
-    // if (message === 'Not authorized, token failed') {
-    //   dispatch(logout())
-    // }
     dispatch({
       type: PRODUCT_UPDATE_FAIL,
       payload: message,
